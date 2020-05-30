@@ -23,11 +23,11 @@ SOURCES += \
     client.cpp \
     credit.cpp \
     debit.cpp \
+    delclient.cpp \
     deposit.cpp \
     findclient.cpp \
     main.cpp \
-    mainwindow.cpp \
-    worker.cpp
+    mainwindow.cpp
 
 HEADERS += \
     Date.h \
@@ -36,13 +36,14 @@ HEADERS += \
     client.h \
     credit.h \
     debit.h \
+    delclient.h \
     deposit.h \
     findclient.h \
-    mainwindow.h \
-    worker.h
+    mainwindow.h
 
 FORMS += \
     addclient.ui \
+    delclient.ui \
     findclient.ui \
     mainwindow.ui
 

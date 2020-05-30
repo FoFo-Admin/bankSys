@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "client.h"
-#include "addclient.h"
 #include <QVector>
 #include "Date.h"
 #include "card.h"

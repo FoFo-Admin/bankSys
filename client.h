@@ -14,11 +14,22 @@ class Client
     Date Birthday;
     bool Lgota;
     QString tel;
-    QVector <Card*> card;
+    Card* card;
 
     bool active;
 public:
-    Client( QString FIO, Date Birthday, bool Lgota, QString tel, QVector<Card*> card);
+    Client( QString FIO, Date Birthday, bool Lgota, QString tel, Card* card);
+
+    //аксессоры
+    const QString getFIO();
+    void setFIO(QString fio);
+    Date getBirthday();
+    void setDate(Date d);
+    bool getLgota();
+    void setLgota(bool lg);
+    const QString gettel();
+    void settel(QString tel);
+    Card* getcard();
 };
 
 #endif // CLIENT_H

@@ -13,7 +13,8 @@ findClient::~findClient()
     delete ui;
 }
 
- void getData(QVector<Client*> cl)
+ void findClient::getData(QVector<Client*> cl)
  {
 
  }
+

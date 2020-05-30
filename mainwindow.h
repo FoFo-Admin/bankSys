@@ -13,6 +13,7 @@
 #include "credit.h"
 #include "debit.h"
 #include "findclient.h"
+#include "delclient.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,8 @@ private slots:
     void on_action_4_triggered();
     void on_action_triggered();
 
+    void on_action_8_triggered();
+
 signals:
     void sendData(QVector<Client*> cl);
 
@@ -37,8 +40,11 @@ private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
 
+    void delData(QString tel, QString number);
+
     QVector<Client*> clients;
     AddClient* addC;
+    delclient* del;
 
     findClient * fc;
     bool Connect();

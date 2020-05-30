@@ -9,9 +9,24 @@ MainWindow::MainWindow(QWidget *parent)
 
     addC = new AddClient();
     fc = new findClient();
+    del = new delclient();
     Connect();
     downloadAll();
     connect(this,SIGNAL(sendData(QVector<Client*>)),fc, SLOT(getData(<Client*>)));
+    connect(del,SIGNAL(sendData(QString, QString)),this, SLOT(delData(QString, QString)));
+}
+
+void MainWindow::delData(QString tel, QString number)
+{
+    QMutableVectorIterator<Client*> i(clients);
+
+    while(i.hasNext()) {
+        Client* current=i.next();
+
+        if(current->gettel() == tel
+        && current->getcard()->getNumber() == number)
+        i.remove();
+    }
 }
 
 MainWindow::~MainWindow()
@@ -57,24 +72,20 @@ void MainWindow::downloadAll()
          QString type = tmpquery.value(0).toString();
          if(tmpquery.value(0).toString()=="Debit")
             {
-                QVector<Card*> card;
-              card.push_back(new Debit(query.value(6).toInt(), tmpquery.value(1).toFloat()));
+              Card* card = new Debit(query.value(6).toInt(), tmpquery.value(1).toFloat());
               clients.push_back(new Client(query.value(0).toString(), date, lg, query.value(4).toString(), card));
-             card.clear();
          }
          else if(tmpquery.value(0).toString()=="Credit")
          {
-                QVector<Card*> card;
-                card.push_back(new Credit(query.value(6).toInt(), tmpquery.value(1).toFloat(), tmpquery.value(2).toFloat(), 25));
+                Card* card = new Credit(query.value(6).toInt(), tmpquery.value(1).toFloat(), tmpquery.value(2).toFloat(), 25);
                 clients.push_back(new Client(query.value(0).toString(), date, lg, query.value(4).toString(), card));
-             card.clear();
+
          }
          else if(tmpquery.value(0).toString()=="Deposit")
          {
-             QVector<Card*> card;
-             card.push_back(new deposit(query.value(6).toInt(), tmpquery.value(1).toFloat(), tmpquery.value(3).toFloat(), 14));
+             Card* card = new deposit(query.value(6).toInt(), tmpquery.value(1).toFloat(), tmpquery.value(3).toFloat(), 14);
              clients.push_back(new Client(query.value(0).toString(), date, lg, query.value(4).toString(), card));
-              card.clear();
+
          }
         }
     }
@@ -90,4 +101,10 @@ void MainWindow::on_action_triggered()
 {
     emit sendData(clients);
     fc->show();
+}
+
+
+void MainWindow::on_action_8_triggered()
+{
+    del->show();
 }
