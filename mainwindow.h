@@ -16,11 +16,17 @@
 #include "delclient.h"
 #include "updateclient.h"
 #include <fstream>
-#include <QWidget>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QString>
 #include <QFile>
+#include <QWidget>
+#include <QNetworkAccessManager>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QUrlQuery>
+#include <QNetworkReply>
+#include <QUrl>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -64,13 +70,17 @@ private slots:
 
 
 
+
+    void on_action_5_triggered();
+
+    void on_action_6_triggered();
+
 signals:
     void sendData(QVector<Client*> cl);
 
 private:
     Ui::MainWindow *ui;
     QSqlDatabase database;
-    QNetworkAccessManager *m_manager;
 
 
 
@@ -78,6 +88,7 @@ private:
     AddClient* addC;
     delclient* del;
     updateClient* update;
+
 
     findClient * fc;
     QFile *m_file;

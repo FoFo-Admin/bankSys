@@ -4,6 +4,7 @@
 #include <QUrl>
 #include <QDebug>
 #include <QMessageBox>
+#include "exeption.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -11,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_manager = new QNetworkAccessManager(this);
     addC = new AddClient();
     fc = new findClient();
     del = new delclient();
@@ -85,9 +85,6 @@ bool MainWindow::Connect()
     database.setDatabaseName(connectingString);
     bool res = database.open();
 
-    if(res) ui->label->setText("База данных подключенна");
-    else ui->label->setText("Потерянно подключение к банковской базе");
-
 
     return res;
 }
@@ -154,6 +151,16 @@ void MainWindow::on_action_2_triggered()
 
 void MainWindow::on_pushButton_clicked()
 {
+    try{
+
+    QSqlQuery queryQ;
+    queryQ.exec("SELECT COUNT(id) from Card where id = '"+ui->lineEdit->text()+"'");
+    while(queryQ.next())
+    {
+        if(queryQ.value(0).toInt() == 0)
+            throw new NotExist();
+    }
+
     if(ui->radioButton->isChecked())
     {
         if(ui->lineEdit_2->text().toInt() > 0)
@@ -179,9 +186,11 @@ void MainWindow::on_pushButton_clicked()
                     msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                     msgBox.exec();
                     }
+                    else throw new NotMuch(clients[i]->getcard()->getNumber());
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_2->isChecked())
     {
@@ -208,6 +217,7 @@ void MainWindow::on_pushButton_clicked()
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_3->isChecked())
     {
@@ -237,10 +247,13 @@ void MainWindow::on_pushButton_clicked()
                             msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                             msgBox.exec();
                         }
+                        else throw new NotMuch(clients[i]->getcard()->getNumber());
                     }
+                    else throw new NotDeposit(clients[i]->getcard()->getNumber());
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_4->isChecked())
     {
@@ -272,14 +285,25 @@ void MainWindow::on_pushButton_clicked()
                                 msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                                 msgBox.exec();
                             }
+                            else throw new tooCredit(clients[i]->getcard()->getNumber());
                         }
+                        else throw new NotMuch(clients[i]->getcard()->getNumber());
                     }
+                    else throw new NotCredit(clients[i]->getcard()->getNumber());
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_5->isChecked())
     {
+        QSqlQuery queryQQ;
+        queryQQ.exec("SELECT COUNT(id) from Card where id = '"+ui->lineEdit_3->text()+"'");
+        while(queryQQ.next())
+        {
+            if(queryQQ.value(0).toInt() == 0)
+                throw new NotExist();
+        }
         if(ui->lineEdit_2->text().toInt() > 0)
         {
             for (int i = 0;i < clients.size();i++) {
@@ -312,12 +336,14 @@ void MainWindow::on_pushButton_clicked()
                                     msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                                     msgBox.exec();
                              }
+                            else throw new NotMuch(clients[i]->getcard()->getNumber());
 
                         }
                     }
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_6->isChecked())
     {
@@ -347,11 +373,14 @@ void MainWindow::on_pushButton_clicked()
                                 msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                                 msgBox.exec();
                             }
+                            else throw new tooDeposit(clients[i]->getcard()->getNumber());
                         }
+                    else throw new NotDeposit(clients[i]->getcard()->getNumber());
 
                 }
             }
         }
+        else throw new WrongMoney();
     }
     if(ui->radioButton_7->isChecked())
     {
@@ -379,11 +408,18 @@ void MainWindow::on_pushButton_clicked()
                                 msgBox.setText("Квитанция созданна под номером " + ui->lineEdit->text().toUtf8()+QString::number(a.getYear()).toUtf8()+QString::number(a.getMonth()).toUtf8()+QString::number(a.getDay()).toUtf8()+QString::number(t.currentTime().hour()).toUtf8()+QString::number(t.currentTime().minute()).toUtf8()+QString::number(t.currentTime().second()).toUtf8()+".html");
                                 msgBox.exec();
                             }
+                    else throw new NotCredit(clients[i]->getcard()->getNumber());
 
 
                 }
             }
         }
+        else throw new WrongMoney();
+    }
+    } catch (Exeption * ex) {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error",ex->SendError());
+        messageBox.setFixedSize(500,200);
     }
 }
 
@@ -458,4 +494,51 @@ void MainWindow::on_action_3_triggered()
             query.exec("update Card set Deposit = "+QString::number(clients[i]->getcard()->getAmount())+" where id = "+QString::number(clients[i]->getcard()->getNumber())+";");
         }
     }
+    QMessageBox msgBox;
+    msgBox.setText("Банк успешно обновлён");
+    msgBox.exec();
+}
+
+void MainWindow::on_action_5_triggered()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_action_6_triggered()
+{
+    float creditMoney = 0;
+    float depositeMoney = 0;
+    float payCredit = 0;
+    float payDeposit = 0;
+
+    for(int i = 0; i < clients.size(); i++)
+    {
+        if(clients[i]->getcard()->type() == "credit")
+        {
+            creditMoney+=clients[i]->getcard()->getAmount();
+            if(clients[i]->getLgota())
+            {
+                payCredit+=clients[i]->getcard()->getAmount()+(((clients[i]->getcard()->getAmount() / 100)*(clients[i]->getcard()->getPercent()-5))/12);
+            }
+            else
+            payCredit+=clients[i]->getcard()->getAmount()+(((clients[i]->getcard()->getAmount() / 100)*clients[i]->getcard()->getPercent())/12);
+        }
+        else if(clients[i]->getcard()->type() == "deposit")
+        {
+            depositeMoney+=clients[i]->getcard()->getAmount();
+            if(clients[i]->getLgota())
+            {
+                payDeposit+=clients[i]->getcard()->getAmount()+(((clients[i]->getcard()->getAmount() / 100)*(clients[i]->getcard()->getPercent()-5))/12);
+            }
+            else
+            payDeposit+=clients[i]->getcard()->getAmount()+(((clients[i]->getcard()->getAmount() / 100)*clients[i]->getcard()->getPercent())/12);
+        }
+    }
+
+    QMessageBox msgBox;
+    msgBox.setText("В текущий момент в Шпакобанке\n\nВсего взято в кредит: " + QString::number(creditMoney)
+                   + "\nПриблизительно будет насчитанно в кредит в следущем месяце: " + QString::number(payCredit)
+                   + "\n\nВсего вложенно в депозит: " + QString::number(depositeMoney)
+                   + "\nПриблизительно будет насчитанно вкладчикам в следущем месяце: " + QString::number(payDeposit));
+    msgBox.exec();
 }

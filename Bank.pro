@@ -40,6 +40,7 @@ HEADERS += \
     debit.h \
     delclient.h \
     deposit.h \
+    exeption.h \
     findclient.h \
     mainwindow.h \
     updateclient.h

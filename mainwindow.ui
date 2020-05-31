@@ -172,6 +172,7 @@ font-size:24px;</string>
      <addaction name="action_2"/>
     </widget>
     <addaction name="menu_2"/>
+    <addaction name="action_6"/>
     <addaction name="action_3"/>
     <addaction name="separator"/>
     <addaction name="action_5"/>
@@ -222,6 +223,11 @@ font-size:24px;</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="action_6">
+   <property name="text">
+    <string>Аналитика</string>
    </property>
   </action>
  </widget>
