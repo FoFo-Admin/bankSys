@@ -31,6 +31,14 @@ public:
     void settel(QString tel);
     Card* getcard() const;
 
+    //--------- Comparison operators ---------
+    bool operator == (const Client&  obj)const&;
+    bool operator != (const Client& obj)const&;
+    bool operator > (const Client& obj)const&;
+    bool operator < (const Client& obj)const&;
+    bool operator >= (const Client& obj)const&;
+    bool operator <= (const Client& obj)const&;
+
 
     Client& operator = (const Client& obj);
 };

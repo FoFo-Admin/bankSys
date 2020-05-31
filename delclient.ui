@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>517</width>
-    <height>97</height>
+    <width>599</width>
+    <height>145</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color:white;
+background:black;
+font-family: Lobster;
+font-size:24px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -44,6 +50,9 @@
    </item>
    <item row="2" column="0">
     <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid white;</string>
+     </property>
      <property name="text">
       <string>Удалить</string>
      </property>

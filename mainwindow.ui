@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>305</width>
-    <height>281</height>
+    <width>542</width>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color:white;
+background:black;
+font-family: Lobster;
+font-size:24px;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -133,6 +139,9 @@
     </item>
     <item row="3" column="0">
      <widget class="QPushButton" name="pushButton">
+      <property name="styleSheet">
+       <string notr="true">border: 2px solid white;</string>
+      </property>
       <property name="text">
        <string>Произвести платеж</string>
       </property>
@@ -145,8 +154,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>305</width>
-     <height>21</height>
+     <width>542</width>
+     <height>36</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

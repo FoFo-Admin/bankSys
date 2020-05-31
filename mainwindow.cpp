@@ -19,26 +19,14 @@ MainWindow::MainWindow(QWidget *parent)
     Connect();
     downloadAll();
     connect(this,SIGNAL(sendData(QVector<Client*>)),fc, SLOT(getData(QVector<Client*>)));
-    connect(del,SIGNAL(sendData(QString, QString)),this, SLOT(delData(QString, QString)));
+    connect(del,SIGNAL(sendData(QString, QString)),this, SLOT(updateData()));
     connect(update,SIGNAL(sendData()),this, SLOT(updateData()));
-    connect(addC,SIGNAL(sendData(Client*)),this, SLOT(updateData()));
+    connect(addC,SIGNAL(sendData()),this, SLOT(updateData()));
 
     ui->label_4->hide();
     ui->lineEdit_3->hide();
 }
 
-void MainWindow::delData(QString tel, QString number)
-{
-    QMutableVectorIterator<Client*> i(clients);
-
-    while(i.hasNext()) {
-        Client* current=i.next();
-
-        if(current->gettel() == tel
-        && current->getcard()->getNumber() == number)
-        i.remove();
-    }
-}
 
 void MainWindow::updateData()
 {

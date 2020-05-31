@@ -6,12 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>483</width>
+    <width>709</width>
     <height>748</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">color:white;
+background:black;
+font-family: Lobster;
+font-size:24px;</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_11">
    <item row="0" column="0">
@@ -51,7 +57,11 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QComboBox" name="comboBox"/>
+             <widget class="QComboBox" name="comboBox">
+              <property name="styleSheet">
+               <string notr="true">border: 2px solid white;</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -65,7 +75,11 @@
              </widget>
             </item>
             <item row="1" column="0">
-             <widget class="QComboBox" name="comboBox_2"/>
+             <widget class="QComboBox" name="comboBox_2">
+              <property name="styleSheet">
+               <string notr="true">border: 2px solid white;</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -142,7 +156,12 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_6">
            <item row="0" column="0">
-            <widget class="QTableWidget" name="tableWidget"/>
+            <widget class="QTableWidget" name="tableWidget">
+             <property name="styleSheet">
+              <string notr="true">color: black;
+background: ghostwhite;</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -184,6 +203,9 @@
    </item>
    <item row="1" column="0" colspan="2">
     <widget class="QPushButton" name="pushButton">
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid white;</string>
+     </property>
      <property name="text">
       <string>Искать</string>
      </property>

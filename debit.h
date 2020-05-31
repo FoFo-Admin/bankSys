@@ -11,6 +11,15 @@ public:
     float getAmount();
     int getPercent();
     void setAmount(float money);
+
+
+    //--------- Comparison operators ---------
+    bool operator == (const Debit&  obj)const&;
+    bool operator != (const Debit& obj)const&;
+    bool operator > (const Debit& obj)const&;
+    bool operator < (const Debit& obj)const&;
+    bool operator >= (const Debit& obj)const&;
+    bool operator <= (const Debit& obj)const&;
 };
 
 #endif // DEBIT_H

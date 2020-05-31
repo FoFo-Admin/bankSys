@@ -65,6 +65,41 @@ Card* Client::getcard() const
     return this->card;
 }
 
+bool Client::operator==(const Client & obj)const&
+{
+    if (this->Birthday == obj.Birthday)
+        return true;
+    else
+        return false;
+}
+
+bool Client::operator!=(const Client & obj)const&
+{
+    return !(*this == obj);
+}
+
+bool Client::operator>(const Client & obj)const&
+{
+    if (this->Birthday > obj.Birthday)
+        return true;
+    return false;
+}
+
+bool Client::operator<(const Client & obj)const&
+{
+    return !( *this > obj) && *this != obj;
+}
+
+bool Client::operator>=(const Client & obj)const&
+{
+    return *this > obj || *this == obj;
+}
+
+bool Client::operator<=(const Client & obj)const&
+{
+    return *this < obj || *this == obj;
+}
+
 
 Client & Client::operator=(const Client & obj)
 {

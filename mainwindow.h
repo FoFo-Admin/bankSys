@@ -60,6 +60,10 @@ private slots:
 
     void on_action_3_triggered();
 
+    void updateData();
+
+
+
 signals:
     void sendData(QVector<Client*> cl);
 
@@ -68,7 +72,7 @@ private:
     QSqlDatabase database;
     QNetworkAccessManager *m_manager;
 
-    void delData(QString tel, QString number);
+
 
     QVector<Client*> clients;
     AddClient* addC;
@@ -78,8 +82,8 @@ private:
     findClient * fc;
     QFile *m_file;
 
-    void updateData();
-    bool Connect();
-    void downloadAll();
+     bool Connect();
+     void downloadAll();
+
 };
 #endif // MAINWINDOW_H

@@ -121,6 +121,120 @@ void findClient::on_pushButton_clicked()
                     ui->tableWidget->setItem(j, 5, item);
                 }
             }
+            else if(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex()).toString()=="debit")
+            {
+                QVector<Client*>c;
+                for(int i = 0; i < cFind.size(); i++)
+                {
+                    if(cFind[i]->getcard()->type()=="debit")
+                        c.push_back(cFind[i]);
+                }
+
+                for(int i = 0; i < c.size(); i++)
+                {
+                    QString l = "false";
+                    if(c[i]->getLgota()) l = "true";
+
+                    int  j = ui->tableWidget->rowCount();
+                    ui->tableWidget->setRowCount(j+1);
+
+                    QTableWidgetItem* item = new QTableWidgetItem();
+                    item->setText(c[i]->getFIO());
+                    ui->tableWidget->setItem(j, 0, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getBirthday().getDay())+"-"+QString::number(c[i]->getBirthday().getMonth())+"-"+QString::number(c[i]->getBirthday().getYear()));
+                    ui->tableWidget->setItem(j, 1, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getcard()->getNumber()));
+                    ui->tableWidget->setItem(j, 2, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->getcard()->type());
+                    ui->tableWidget->setItem(j, 3, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->gettel());
+                    ui->tableWidget->setItem(j, 4, item);
+                    item = new QTableWidgetItem();
+                    item->setText(l);
+                    ui->tableWidget->setItem(j, 5, item);
+                }
+
+            }
+            else if(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex()).toString()=="credit")
+            {
+                QVector<Client*>c;
+                for(int i = 0; i < cFind.size(); i++)
+                {
+                    if(cFind[i]->getcard()->type()=="credit")
+                        c.push_back(cFind[i]);
+                }
+
+                for(int i = 0; i < c.size(); i++)
+                {
+                    QString l = "false";
+                    if(c[i]->getLgota()) l = "true";
+
+                    int  j = ui->tableWidget->rowCount();
+                    ui->tableWidget->setRowCount(j+1);
+
+                    QTableWidgetItem* item = new QTableWidgetItem();
+                    item->setText(c[i]->getFIO());
+                    ui->tableWidget->setItem(j, 0, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getBirthday().getDay())+"-"+QString::number(c[i]->getBirthday().getMonth())+"-"+QString::number(c[i]->getBirthday().getYear()));
+                    ui->tableWidget->setItem(j, 1, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getcard()->getNumber()));
+                    ui->tableWidget->setItem(j, 2, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->getcard()->type());
+                    ui->tableWidget->setItem(j, 3, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->gettel());
+                    ui->tableWidget->setItem(j, 4, item);
+                    item = new QTableWidgetItem();
+                    item->setText(l);
+                    ui->tableWidget->setItem(j, 5, item);
+                }
+
+            }
+            else if(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex()).toString()=="deposit")
+            {
+                QVector<Client*>c;
+                for(int i = 0; i < cFind.size(); i++)
+                {
+                    if(cFind[i]->getcard()->type()=="deposit")
+                        c.push_back(cFind[i]);
+                }
+
+                for(int i = 0; i < c.size(); i++)
+                {
+                    QString l = "false";
+                    if(c[i]->getLgota()) l = "true";
+
+                    int  j = ui->tableWidget->rowCount();
+                    ui->tableWidget->setRowCount(j+1);
+
+                    QTableWidgetItem* item = new QTableWidgetItem();
+                    item->setText(c[i]->getFIO());
+                    ui->tableWidget->setItem(j, 0, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getBirthday().getDay())+"-"+QString::number(c[i]->getBirthday().getMonth())+"-"+QString::number(c[i]->getBirthday().getYear()));
+                    ui->tableWidget->setItem(j, 1, item);
+                    item = new QTableWidgetItem();
+                    item->setText(QString::number(c[i]->getcard()->getNumber()));
+                    ui->tableWidget->setItem(j, 2, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->getcard()->type());
+                    ui->tableWidget->setItem(j, 3, item);
+                    item = new QTableWidgetItem();
+                    item->setText(c[i]->gettel());
+                    ui->tableWidget->setItem(j, 4, item);
+                    item = new QTableWidgetItem();
+                    item->setText(l);
+                    ui->tableWidget->setItem(j, 5, item);
+                }
+
+            }
         }
         else if(ui->comboBox->itemData(ui->comboBox->currentIndex()).toString()=="cre")
         {
@@ -173,9 +287,198 @@ void findClient::on_pushButton_clicked()
             }
 
         }
+        else if(ui->comboBox->itemData(ui->comboBox->currentIndex()).toString()=="dep")
+        {
+            QVector<Client*>c;
+            for(int i = 0; i < cFind.size(); i++)
+            {
+                if(cFind[i]->getcard()->type()=="deposit")
+                    c.push_back(cFind[i]);
+            }
+            Client* temp;
+            for(int i = 0; i < c.size()-1; i++)
+            {
+                for (int j = 0; j < c.size() - i - 1; j++) {
+                           if (c[j]->getcard() < c[j + 1]->getcard()) {
+                               temp = new Client(c[j]);
+                               c[j] = c[j + 1];
+                               c[j + 1] = temp;
+                           }
+                       }
+
+            }
+
+
+            for(int i = 0; i < c.size(); i++)
+            {
+                QString l = "false";
+                if(c[i]->getLgota()) l = "true";
+
+                int  j = ui->tableWidget->rowCount();
+                ui->tableWidget->setRowCount(j+1);
+
+                QTableWidgetItem* item = new QTableWidgetItem();
+                item->setText(c[i]->getFIO());
+                ui->tableWidget->setItem(j, 0, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(c[i]->getBirthday().getDay())+"-"+QString::number(c[i]->getBirthday().getMonth())+"-"+QString::number(c[i]->getBirthday().getYear()));
+                ui->tableWidget->setItem(j, 1, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(c[i]->getcard()->getNumber()));
+                ui->tableWidget->setItem(j, 2, item);
+                item = new QTableWidgetItem();
+                item->setText(c[i]->getcard()->type());
+                ui->tableWidget->setItem(j, 3, item);
+                item = new QTableWidgetItem();
+                item->setText(c[i]->gettel());
+                ui->tableWidget->setItem(j, 4, item);
+                item = new QTableWidgetItem();
+                item->setText(l);
+                ui->tableWidget->setItem(j, 5, item);
+            }
+
+        }
+        else if(ui->comboBox->itemData(ui->comboBox->currentIndex()).toString()=="acc")
+        {
+            QVector<Client*>c;
+            for(int i = 0; i < cFind.size(); i++)
+            {
+                if(cFind[i]->getcard()->type()=="debit")
+                    c.push_back(cFind[i]);
+            }
+            Client* temp;
+            for(int i = 0; i < c.size()-1; i++)
+            {
+                for (int j = 0; j < c.size() - i - 1; j++) {
+                           if (c[j]->getcard() < c[j + 1]->getcard()) {
+                               temp = new Client(c[j]);
+                               c[j] = c[j + 1];
+                               c[j + 1] = temp;
+                           }
+                       }
+
+            }
+
+
+            for(int i = 0; i < c.size(); i++)
+            {
+                QString l = "false";
+                if(c[i]->getLgota()) l = "true";
+
+                int  j = ui->tableWidget->rowCount();
+                ui->tableWidget->setRowCount(j+1);
+
+                QTableWidgetItem* item = new QTableWidgetItem();
+                item->setText(c[i]->getFIO());
+                ui->tableWidget->setItem(j, 0, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(c[i]->getBirthday().getDay())+"-"+QString::number(c[i]->getBirthday().getMonth())+"-"+QString::number(c[i]->getBirthday().getYear()));
+                ui->tableWidget->setItem(j, 1, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(c[i]->getcard()->getNumber()));
+                ui->tableWidget->setItem(j, 2, item);
+                item = new QTableWidgetItem();
+                item->setText(c[i]->getcard()->type());
+                ui->tableWidget->setItem(j, 3, item);
+                item = new QTableWidgetItem();
+                item->setText(c[i]->gettel());
+                ui->tableWidget->setItem(j, 4, item);
+                item = new QTableWidgetItem();
+                item->setText(l);
+                ui->tableWidget->setItem(j, 5, item);
+            }
+
+        }
+        else if(ui->comboBox->itemData(ui->comboBox->currentIndex()).toString()=="date")
+        {
+            Client* temp;
+            for(int i = 0; i < cFind.size()-1; i++)
+            {
+                for (int j = 0; j < cFind.size() - i - 1; j++) {
+                           if (cFind[j]->getcard() < cFind[j + 1]->getcard()) {
+                               temp = new Client(cFind[j]);
+                               cFind[j] = cFind[j + 1];
+                               cFind[j + 1] = temp;
+                           }
+                       }
+
+            }
+
+
+            for(int i = 0; i < cFind.size(); i++)
+            {
+                QString l = "false";
+                if(cFind[i]->getLgota()) l = "true";
+
+                int  j = ui->tableWidget->rowCount();
+                ui->tableWidget->setRowCount(j+1);
+
+                QTableWidgetItem* item = new QTableWidgetItem();
+                item->setText(cFind[i]->getFIO());
+                ui->tableWidget->setItem(j, 0, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(cFind[i]->getBirthday().getDay())+"-"+QString::number(cFind[i]->getBirthday().getMonth())+"-"+QString::number(cFind[i]->getBirthday().getYear()));
+                ui->tableWidget->setItem(j, 1, item);
+                item = new QTableWidgetItem();
+                item->setText(QString::number(cFind[i]->getcard()->getNumber()));
+                ui->tableWidget->setItem(j, 2, item);
+                item = new QTableWidgetItem();
+                item->setText(cFind[i]->getcard()->type());
+                ui->tableWidget->setItem(j, 3, item);
+                item = new QTableWidgetItem();
+                item->setText(cFind[i]->gettel());
+                ui->tableWidget->setItem(j, 4, item);
+                item = new QTableWidgetItem();
+                item->setText(l);
+                ui->tableWidget->setItem(j, 5, item);
+            }
+
+        }
+
+
         if(ui->fio->isChecked())
         {
-
+            for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+            {
+                if(ui->lineEdit->text() != ui->tableWidget->item(i, 0)->text())
+                {
+                    ui->tableWidget->removeRow(i);
+                     i=-1;
+                }
+            }
+        }
+        if(ui->tel->isChecked())
+        {
+            for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+            {
+                if(ui->lineEdit_2->text() != ui->tableWidget->item(i, 4)->text())
+                {
+                    ui->tableWidget->removeRow(i);
+                     i=-1;
+                }
+            }
+        }
+        if(ui->date->isChecked())
+        {
+            for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+            {
+                if(QString::number(ui->dateEdit->date().day())+"-"+QString::number(ui->dateEdit->date().month())+"-"+QString::number(ui->dateEdit->date().year()) != ui->tableWidget->item(i, 1)->text())
+                {
+                    ui->tableWidget->removeRow(i);
+                     i=-1;
+                }
+            }
+        }
+        if(ui->lg->isChecked())
+        {
+            for(int i = 0; i < ui->tableWidget->rowCount(); i++)
+            {
+                if(ui->tableWidget->item(i, 5)->text()!="true")
+                {
+                    ui->tableWidget->removeRow(i);
+                     i=-1;
+                }
+            }
         }
     }
 }
