@@ -21,19 +21,19 @@ delclient::~delclient()
 void delclient::on_pushButton_clicked()
 {
     QSqlQuery query;
-    query.exec("select count(id) from Customer where tel = "+ui->lineEdit->text()+" and Card_id = "+ui->lineEdit_2->text()+";");
+    query.exec("select count(id) from Customer where tel = '"+ui->lineEdit->text()+"' and Card_id = "+ui->lineEdit_2->text()+";");
 
     while(query.next())
     {
         if(query.value(0).toInt()!=0)
         {
             QSqlQuery query1;
-            query1.exec("delete from Customer where tel = "+ui->lineEdit->text()+" and Card_id = "+ui->lineEdit_2->text()+";");
+            query1.exec("delete from Customer where tel = '"+ui->lineEdit->text()+"' and Card_id = "+ui->lineEdit_2->text()+";");
             QSqlQuery query2;
             query2.exec("delete from Card where id = "+ui->lineEdit_2->text()+";");
+            emit sendData(ui->lineEdit->text(), ui->lineEdit_2->text());
+            this->hide();
         }
     }
-    emit sendData(ui->lineEdit->text(), ui->lineEdit_2->text());
-    this->hide();
 
 }

@@ -25,8 +25,16 @@ public:
     void getData(QVector<Client*> cl);
 
 
+private slots:
+    void on_radioButton_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::findClient *ui;
+    QVector<Client*> cFind;
 };
 
 #endif // FINDCLIENT_H

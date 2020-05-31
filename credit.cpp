@@ -20,7 +20,43 @@ int Credit::getPercent()
     return this->creditPercent;
 }
 
-void Credit::changeBalance()
+void Credit::setAmount(float money)
 {
-
+    this->creditAmount=money;
 }
+
+bool Credit::operator==(const Credit & obj)const&
+{
+    if (this->creditAmount == obj.creditAmount)
+        return true;
+    else
+        return false;
+}
+
+bool Credit::operator!=(const Credit & obj)const&
+{
+    return !(*this == obj);
+}
+
+bool Credit::operator>(const Credit & obj)const&
+{
+    if (this->creditAmount > obj.creditAmount)
+        return true;
+    return false;
+}
+
+bool Credit::operator<(const Credit & obj)const&
+{
+    return !( *this > obj) && *this != obj;
+}
+
+bool Credit::operator>=(const Credit & obj)const&
+{
+    return *this > obj || *this == obj;
+}
+
+bool Credit::operator<=(const Credit & obj)const&
+{
+    return *this < obj || *this == obj;
+}
+

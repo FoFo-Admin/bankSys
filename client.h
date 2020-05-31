@@ -19,17 +19,20 @@ class Client
     bool active;
 public:
     Client( QString FIO, Date Birthday, bool Lgota, QString tel, Card* card);
-
+    Client(Client* obj);
     //аксессоры
-    const QString getFIO();
+    const QString getFIO() const;
     void setFIO(QString fio);
-    Date getBirthday();
+    Date getBirthday() const;
     void setDate(Date d);
-    bool getLgota();
+    bool getLgota() const;
     void setLgota(bool lg);
-    const QString gettel();
+    const QString gettel() const;
     void settel(QString tel);
-    Card* getcard();
+    Card* getcard() const;
+
+
+    Client& operator = (const Client& obj);
 };
 
 #endif // CLIENT_H

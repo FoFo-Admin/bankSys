@@ -7,10 +7,10 @@ class Debit:public Card
 public:
     Debit(int number, float balance);
 
-    void changeBalance();
     QString type();
     float getAmount();
     int getPercent();
+    void setAmount(float money);
 };
 
 #endif // DEBIT_H

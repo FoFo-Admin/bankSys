@@ -4,7 +4,13 @@
 #include <QDialog>
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include "client.h"
+#include <QVector>
 #include "Date.h"
+#include "card.h"
+#include "deposit.h"
+#include "credit.h"
+#include "debit.h"
 
 namespace Ui {
 class AddClient;
@@ -20,6 +26,9 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+
+signals:
+    void sendData();
 
 private:
     Ui::AddClient *ui;

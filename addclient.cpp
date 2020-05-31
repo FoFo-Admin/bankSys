@@ -40,6 +40,6 @@ void AddClient::on_pushButton_clicked()
     query.exec();
 
     query.exec("INSERT Customer VALUES('"+name+"', '"+surname+"','"+middlename+"', '"+sDay+"-"+sMonth+"-"+sYear+"', '"+tel+"', "+sLgota+", (SELECT TOP(1) id FROM Card ORDER BY id DESC));");
-
+    emit sendData();
     this->hide();
 }

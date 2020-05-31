@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>305</width>
-    <height>283</height>
+    <height>281</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,6 +35,9 @@
        <widget class="QRadioButton" name="radioButton">
         <property name="text">
          <string>Снять</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -176,6 +179,9 @@
    <property name="text">
     <string>Выход</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
   </action>
   <action name="action_8">
    <property name="text">
@@ -204,6 +210,9 @@
   <action name="action_2">
    <property name="text">
     <string>Изменение</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
  </widget>

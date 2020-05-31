@@ -13,9 +13,16 @@ public:
     float getAmount();
     int getPercent();
 
-    void changeDeposit();
-    void changeBalance();
+    void setAmount(float money);
     QString type();
+
+    //--------- Comparison operators ---------
+    bool operator == (const deposit&  obj)const&;
+    bool operator != (const deposit& obj)const&;
+    bool operator > (const deposit& obj)const&;
+    bool operator < (const deposit& obj)const&;
+    bool operator >= (const deposit& obj)const&;
+    bool operator <= (const deposit& obj)const&;
 };
 
 #endif // DEPOSIT_H

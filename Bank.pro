@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += sql
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +28,8 @@ SOURCES += \
     deposit.cpp \
     findclient.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    updateclient.cpp
 
 HEADERS += \
     Date.h \
@@ -39,13 +41,15 @@ HEADERS += \
     delclient.h \
     deposit.h \
     findclient.h \
-    mainwindow.h
+    mainwindow.h \
+    updateclient.h
 
 FORMS += \
     addclient.ui \
     delclient.ui \
     findclient.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    updateclient.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

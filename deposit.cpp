@@ -20,7 +20,43 @@ int deposit::getPercent()
     return this->depositPercent;
 }
 
-void deposit::changeBalance()
+void deposit::setAmount(float money)
 {
-
+    this->depositAmount = money;
 }
+
+bool deposit::operator==(const deposit & obj)const&
+{
+    if (this->depositAmount == obj.depositAmount)
+        return true;
+    else
+        return false;
+}
+
+bool deposit::operator!=(const deposit & obj)const&
+{
+    return !(*this == obj);
+}
+
+bool deposit::operator>(const deposit & obj)const&
+{
+    if (this->depositAmount > obj.depositAmount)
+        return true;
+    return false;
+}
+
+bool deposit::operator<(const deposit & obj)const&
+{
+    return !( *this > obj) && *this != obj;
+}
+
+bool deposit::operator>=(const deposit & obj)const&
+{
+    return *this > obj || *this == obj;
+}
+
+bool deposit::operator<=(const deposit & obj)const&
+{
+    return *this < obj || *this == obj;
+}
+

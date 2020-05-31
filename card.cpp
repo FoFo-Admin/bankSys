@@ -14,3 +14,7 @@ float Card::getBalance()
 {
     return this->balance;
 }
+void Card::setBalance(float money)
+{
+    this->balance = money;
+}

@@ -10,7 +10,7 @@ QString Debit::type()
     return "debit";
 }
 
-void Debit::changeBalance()
+void Debit::setAmount(float money)
 {
 
 }
